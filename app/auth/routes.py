@@ -3,7 +3,6 @@ import datetime
 from flask import request, jsonify,current_app
 from app import db, bcrypt
 from app.models import User
-from app import login_manager
 from . import auth_bp  
 
 @auth_bp.route('/register', methods=['POST']) #这是注册路由，@是装饰器，auth_bp是蓝图对象，register是路由函数
@@ -26,11 +25,6 @@ def register():
     db.session.commit() #提交数据库会话，真正写入数据库
 
     return jsonify({"message": "User registered successfully"}), 201
-
-# 定义用户加载函数，用于从数据库中加载用户信息，用于Flask-Login的用户认证，调用时机是在用户登录成功后，自动调用
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
 
 @auth_bp.route('/login', methods=['POST'])
 def login():

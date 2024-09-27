@@ -39,7 +39,7 @@ def delete_user(id):
 
 @user_bp.route('/update/<int:id>', methods=['PUT'])
 def update_user(id):
-    user = User.query.get_or_404(id)
+    user = User.query.get_or_404(id)    # 查询用户
     data = request.get_json()
 
     user.username = data.get('username', user.username)
@@ -56,7 +56,7 @@ def update_user(id):
 @user_bp.route('/list', methods=['GET'])
 def list_users():
     users = User.query.all()
-    user_list = [{"id": user.id, "username": user.username, "email": user.email} for user in users]
+    user_list = [{"id": user.id, "username": user.username, "email": user.email} for user in users] #列表推导式
 
     return jsonify(user_list), 200
 
@@ -68,10 +68,10 @@ def upload_file():
     if file.filename == '':
         return jsonify({"message": "No selected file"}), 400
     if file:
-        file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], file.filename)
-        file.save(file_path)
+        file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], file.filename) # 拼接文件路径
+        file.save(file_path) # 保存文件
         return jsonify({"message": "File uploaded successfully"}), 201
 
 @user_bp.route('/download/<filename>', methods=['GET'])
 def download_file(filename):
-    return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
+    return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename) #send_from_directory 函数用于从指定目录下发送文件，filename 是要下载的文件名
