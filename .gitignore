@@ -11,8 +11,8 @@ __pycache__/
 # 忽略日志文件
 *.log
 
-# 忽略上传目录
-uploads/
+# 忽略 uploads 目录下的所有文件，但保留 .gitkeep 文件
+uploads/*
 !uploads/.gitkeep
 
 # 忽略操作系统生成的文件
