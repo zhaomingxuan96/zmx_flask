@@ -61,9 +61,9 @@ flask run
 
 ### 9.使用说明
 使用postman等工具，访问 http://127.0.0.1:5000/ 
-用户注册：POST /auth/register
-用户登录：POST /auth/login
-获取用户列表：GET /user/list
+- **用户注册**：`POST /auth/register`
+- **用户登录**：`POST /auth/login`
+- **获取用户列表**：`GET /user/list`
 
 ### 10.贡献指南
 欢迎任何形式的贡献！请提出建议或提交代码。
