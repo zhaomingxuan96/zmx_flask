@@ -21,9 +21,15 @@
 ### 2. 创建项目目录
 在开发环境中创建项目目录 `flask_project`。
 
-### 3. 创建虚拟环境
+### 3. 创建并激活虚拟环境
 使用以下命令创建虚拟环境：
+```bash
 conda create -n flask_env python=3.10
+```
+然后，使用以下命令激活虚拟环境：
+```bash
+conda activate flask_env
+```
 
 ### 4. 克隆仓库
 ```bash
