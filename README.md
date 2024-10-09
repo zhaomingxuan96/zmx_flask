@@ -33,7 +33,7 @@ conda activate flask_env
 
 ### 4. 克隆仓库
 ```bash
-git clone https://github.com/yourusername/yourproject.git
+git clone https://github.com/zhaomingxuan96/zmx_flask.git
 ```
 
 ### 5. 安装依赖
