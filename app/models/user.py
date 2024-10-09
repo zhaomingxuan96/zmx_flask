@@ -1,4 +1,4 @@
-from app import db, bcrypt #这里的db和bcrypt分别是SQLAlchemy和Bcrypt类的实例，用于数据库操作和密码哈希
+from app.extensions import db, bcrypt  #这里的db和bcrypt分别是SQLAlchemy和Bcrypt类的实例，用于数据库操作和密码哈希
 
 # 定义用户模型，继承自db.Model其中db.Model是SQLAlchemy类的实例
 # User继承自 db.Model, 让User 类成为一个 ORM（对象关系映射）模型。简单来说，通过继承 db.Model，User 类就被视为一个数据库表。

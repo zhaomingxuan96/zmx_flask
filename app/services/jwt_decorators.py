@@ -4,7 +4,7 @@ from functools import wraps
 from app.models import User
 
 def token_required(f):
-    @wraps(f)
+    @wraps(f) 
     def decorated(*args, **kwargs):
 
          # 检查是否豁免某些路由

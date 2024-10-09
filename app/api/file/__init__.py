@@ -1,11 +1,11 @@
 from flask import Blueprint
-from app.jwtDecorators import token_required
+from app.services.jwt_decorators import token_required
 
 # 创建 user 蓝图
-user_bp = Blueprint('user', __name__)
+file_bp = Blueprint('file', __name__)
 
 # 应用 token_required 到整个蓝图
-@user_bp.before_request
+@file_bp.before_request
 @token_required
 def before_request():
     pass 
