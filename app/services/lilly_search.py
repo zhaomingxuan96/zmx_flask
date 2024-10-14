@@ -1,31 +1,59 @@
 import os
 import sys
 from typing import Any, Union
-
-from core.tools.entities.tool_entities import ToolInvokeMessage
-from core.tools.tool.builtin_tool import BuiltinTool
+from dotenv import load_dotenv
 import psycopg2
 
-class LillySearchTool(BuiltinTool):
+load_dotenv() # load .env file
+
+DATABASES = {
+    "DATABASE1": {
+        "HOST": os.getenv('DATABASE1_HOST'),
+        "PORT": os.getenv('DATABASE1_PORT'),
+        "USERNAME": os.getenv('DATABASE1_USERNAME'),
+        "PASSWORD": os.getenv('DATABASE1_PASSWORD'),
+        "DATABASE": os.getenv('DATABASE1_DATABASE'),
+        "DBSCHEMA": os.getenv('DATABASE1_DBSCHEMA')
+    },
+    "DATABASE2": {
+        "HOST": os.getenv('DATABASE2_HOST'),
+        "PORT": os.getenv('DATABASE2_PORT'),
+        "USERNAME": os.getenv('DATABASE2_USERNAME'),
+        "PASSWORD": os.getenv('DATABASE2_PASSWORD'),
+        "DATABASE": os.getenv('DATABASE2_DATABASE'),
+        "DBSCHEMA": os.getenv('DATABASE2_DBSCHEMA')
+    },
+    "DATABASE3": {
+        "HOST": os.getenv('DATABASE3_HOST'),
+        "PORT": os.getenv('DATABASE3_PORT'),
+        "USERNAME": os.getenv('DATABASE3_USERNAME'),
+        "PASSWORD": os.getenv('DATABASE3_PASSWORD'),
+        "DATABASE": os.getenv('DATABASE3_DATABASE'),
+        "DBSCHEMA": os.getenv('DATABASE3_DBSCHEMA')
+    }
+}
+
+class LillySearchTool():
     def _invoke(self, 
                 user_id: str,
                tool_parameters: dict[str, Any], 
-        ) -> Union[ToolInvokeMessage, list[ToolInvokeMessage]]:
+        ) :
         """
             invoke tools
         """
         query = tool_parameters['query']
-        host = tool_parameters['host']
-        database = tool_parameters['database']
-        dbuser = tool_parameters['dbuser']
-        dbpassword = tool_parameters['dbpassword']
-        dbschema = tool_parameters['dbschema']
+        databasecode = tool_parameters['database']
+        host = DATABASES[databasecode]["HOST"]
+        dbuser = DATABASES[databasecode]["USERNAME"]
+        database = DATABASES[databasecode]["DATABASE"]
+        dbpassword = DATABASES[databasecode]["PASSWORD"]
+        dbschema = DATABASES[databasecode]["DBSCHEMA"]
         # TODO:  filter sql format,can only be 'select'
         if not query:
-            return self.create_text_message('Please input query')
+            return 'Please input query'
         # api_key = self.runtime.credentials['serpapi_api_key']
         result = self.GetData(query,host,database,dbuser,dbpassword,dbschema)
-        return self.create_text_message(text=result)
+        return result
     
     def GetData(self,
                 sql: any,
@@ -54,6 +82,7 @@ class LillySearchTool(BuiltinTool):
             cur.execute("SET search_path TO %s", (dbschema,))
             cur.execute(sql)
             rows = cur.fetchall()
+
             # 检查行数是否大于0
             if len(rows) > 0:
                 # 获取列名

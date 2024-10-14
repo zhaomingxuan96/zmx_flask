@@ -1,4 +1,5 @@
 from flask import Flask,request, jsonify
+from flask import render_template
 from app.api import blueprints
 from app.config import Config # 导入Config 作用是配置文件，import引入是从根目录开始找config.py文件
 from app.extensions import db, migrate, bcrypt
@@ -13,7 +14,7 @@ def create_app():
 
     @app.route('/', methods=['GET'])
     def test():
-        return jsonify(message="这是一个测试接口！"), 200
+        return render_template('hello.html'),200
     
     # 注册 api 模块中的蓝图
     for blueprint, url_prefix in blueprints:

@@ -18,21 +18,22 @@ def query_database():
 
         tool_parameters = {
             "query": data.get("query"),
-            "host": data.get("host"),
+            # "host": data.get("host"),
             "database": data.get("database"),
-            "dbuser": data.get("dbuser"),
-            "dbpassword": data.get("dbpassword"),
-            "dbschema": data.get("dbschema", "public")  # 默认 schema 为 public
+            # "dbuser": data.get("dbuser"),
+            # "dbpassword": data.get("dbpassword"),
+            # "dbschema": data.get("dbschema", "public")  # 默认 schema 为 public
         }
 
         # 检查所有必需参数是否存在
         for param, value in tool_parameters.items():
             if value is None:
                 raise ValueError(f"参数 '{param}' 是必需的")
-
+        print('qqqqq',tool_parameters,user_id)
         # 调用 LillySearchTool 的 _invoke 方法
         result_message = search_tool._invoke(user_id, tool_parameters)
-        return jsonify({'result': result_message.content}), 201
+        print('result_message',result_message)
+        return jsonify({'result': result_message}), 201
 
     except ValueError as ve:
         return jsonify({'error': str(ve)}), 400
