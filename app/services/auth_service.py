@@ -35,7 +35,7 @@ def authenticate_user(email, password):
             # 生成JWT
             token = jwt.encode({
                 'user_id': user.id,
-                'exp': datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=1)
+                'exp': datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=1),
             }, current_app.config['SECRET_KEY'], algorithm='HS256')
 
             return {'token': token}, 200

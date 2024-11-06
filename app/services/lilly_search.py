@@ -56,7 +56,7 @@ class LillySearchTool():
         return result
     
     def GetData(self,
-                sql: any,
+                sql: str,
                 host: str,
                 database: str,
                 dbuser: str,

@@ -18,11 +18,7 @@ def query_database():
 
         tool_parameters = {
             "query": data.get("query"),
-            # "host": data.get("host"),
             "database": data.get("database"),
-            # "dbuser": data.get("dbuser"),
-            # "dbpassword": data.get("dbpassword"),
-            # "dbschema": data.get("dbschema", "public")  # 默认 schema 为 public
         }
 
         # 检查所有必需参数是否存在
