@@ -14,7 +14,25 @@
 - MySQL
 
 ## 安装与配置
+### 使用docker部署
+克隆仓库：
+```bash
+git clone https://github.com/zhaomingxuan96/zmx_flask.git
 
+```
+```bash
+docker-compose build
+```
+```bash
+docker-compose up
+```
+数据库映射宿主机端口：`3333`
+数据库用户名：`root`
+数据库密码：`123456`
+
+访问：`http://127.0.0.1:5000/`
+
+## 本地部署
 ### 1. 项目初始化
 首先，确保你已安装 [Miniconda](https://docs.conda.io/en/latest/miniconda.html) 或 [Anaconda](https://www.anaconda.com/products/distribution).
 
@@ -36,28 +54,16 @@ conda activate flask_env
 git clone https://github.com/zhaomingxuan96/zmx_flask.git
 ```
 
-### 5. docker部署
-```bash
-docker-compose build
-```
-```bash
-docker-compose up
-```
-数据库映射宿主机端口：`3333`
-数据库用户名：`root`
-数据库密码：`123456`
-
-
-### 6. 安装依赖
+### 5. 安装依赖
 进入项目目录后，安装所需依赖：
 ```bash
 pip install -r requirements.txt
 ```
 
-### 7. 配置文件
+### 6. 配置文件
 在项目根目录下创建 `.env` 文件，复制.env.example 中的内容到 `.env` 文件中，并修改其中的配置信息。
 
-### 8. 数据库迁移
+### 7. 数据库迁移
 使用 Flask-Migrate 进行数据库迁移：
 ```bash
 flask db init
@@ -65,20 +71,20 @@ flask db migrate -m "create users table"
 flask db upgrade
 ```
 
-### 9. 运行项目
+### 8. 运行项目
 使用以下命令运行项目：
 ```bash
 flask run
 ```
 
-### 10.使用说明
+### 9.使用说明
 使用postman等工具，访问 http://127.0.0.1:5000/ 
 - **用户注册**：`POST /auth/register`
 - **用户登录**：`POST /auth/login`
 - **获取用户列表**：`GET /user/list`
 
-### 11.贡献指南
+### 10.贡献指南
 欢迎任何形式的贡献！请提出建议或提交代码。
 
-### 12.许可证
+### 11.许可证
 本项目使用 MIT 许可证。
