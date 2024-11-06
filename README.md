@@ -12,6 +12,8 @@
 ## 技术栈
 - Flask
 - MySQL
+- Docker
+
 
 ## 安装与配置
 ### 使用docker部署
@@ -20,9 +22,11 @@
 git clone https://github.com/zhaomingxuan96/zmx_flask.git
 
 ```
+构建镜像：
 ```bash
 docker-compose build
 ```
+启动容器[flask和mysql]：
 ```bash
 docker-compose up
 ```
