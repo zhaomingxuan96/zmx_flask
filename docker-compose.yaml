@@ -1,27 +1,37 @@
+version: '3'  # 指定 Docker Compose 文件的版本
+
 services:
-  web:
-    build: .
-    container_name: flask_app
+  web:  # 定义一个名为 "web" 的服务
+    build: .  # 使用当前目录下的 Dockerfile 构建镜像，也可以指定详细路径
+    container_name: flask_app  # 指定容器名称
     ports:
-      - "5000:5000"
-    environment:
+      - "5000:5000"  # 将主机的 5000 端口映射到容器的 5000 端口
+    environment:  # 设置环境变量
       - FLASK_APP=run.py
       - FLASK_ENV=development
       - SQLALCHEMY_DATABASE_URI=mysql+pymysql://root:123456@db/test
       - SECRET_KEY=your_secret_key
-    depends_on:
+    depends_on:  # 指定依赖的服务（在 "db" 服务启动后启动）
       - db
+    networks:
+      - app-network
+    restart: always
 
-  db:
-    image: mysql:8
-    container_name: mysql_db
-    environment:
+  db:  # 定义一个名为 "db" 的服务
+    image: mysql:8  # 使用官方的 MySQL 8 镜像
+    container_name: mysql_db  # 指定容器名称
+    environment:  # 设置环境变量
       - MYSQL_ROOT_PASSWORD=123456 
       - MYSQL_DATABASE=test         
     ports:
-      - "3333:3306"
+      - "3333:3306"  # 将主机的 3333 端口映射到容器的 3306 端口
     volumes:
-      - mysql_data:/var/lib/mysql
-
+      - mysql_data:/var/lib/mysql  # 将数据卷 "mysql_data" 挂载到容器的 /var/lib/mysql 目录
+    networks:
+      - app-network
+    restart: always
+    
+networks:
+  app-network:
 volumes:
-  mysql_data:
+  mysql_data:  # 声明一个名为 "mysql_data" 的数据卷

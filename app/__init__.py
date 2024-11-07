@@ -21,3 +21,5 @@ def create_app():
         app.register_blueprint(blueprint, url_prefix=url_prefix)
 
     return app
+
+# app = create_app()
